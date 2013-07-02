@@ -9,3 +9,6 @@ include "<%=@config_dir%>/named.conf.local";
 include "<%=@config_dir%>/<%=@rfc1912_zones%>";
 <% end -%>
 <% end -%>
+<% if @root_servers -%>
+include "<%=@root_servers%>";
+<% end -%>
