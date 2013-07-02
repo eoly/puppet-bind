@@ -1,0 +1,11 @@
+//
+// Do any local configuration here
+//
+
+<% if !@zones.empty? -%>
+<% @zones.sort_by {|key, value| key}.each do |key,value| -%>
+zone "<%= key %>" IN {
+<% value.each do |line| -%>
+    <%= line %>;
+<% end -%>
+};
