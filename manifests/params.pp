@@ -13,6 +13,7 @@ class bind::params {
       $config_dir        = '/etc'
       $working_dir       = '/var/named'
       $rfc1912_zones     = 'named.rfc1912.zones'
+      $root_servers      = '/var/named/named.ca'
     }
     'Debian',
     'Ubuntu': {
@@ -23,6 +24,7 @@ class bind::params {
       $config_dir        = '/etc/bind'
       $working_dir       = '/var/cache/bind'
       $rfc1912_zones     = 'named.conf.default-zones'
+      $root_servers      = '/etc/bind/db.root'
     }
     default: {
       $packagenameprefix = 'bind'
@@ -32,6 +34,7 @@ class bind::params {
       $config_dir        = '/etc/named'
       $working_dir       = '/var/named'
       $rfc1912_zones     = 'named.rfc1912.zones'
+      $root_servers      = '/var/named/named.ca'
     }
   }
 
