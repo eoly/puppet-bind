@@ -2,6 +2,24 @@
 // Do any local configuration here
 //
 
+<%- if !@acls.empty? -%>
+<%- @acls.sort_by {|key, value| key}.each do |key,value| -%>
+acl <%= key %> {
+<%- value.each do |line| -%>
+    <%= line %>;
+<%- end -%>
+};
+
+<%- end -%>
+<%- end -%>
+<%- if !@masters.empty? -%>
+<%- @masters.sort_by {|key, value| key}.each do |key,value| -%>
+masters <%= key %> {
+<%- value.each do |line| -%>
+    <%= line %>;
+<%- end -%>
+};
+
 <%- if !@includes.empty? -%>
 <%- @includes.each do |filename| -%>
     include "<%= filename %>";
