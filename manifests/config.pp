@@ -25,6 +25,15 @@ class bind::config (
   $includes           = []
 ) inherits bind::params {
 
+  file { "$config_dir/$bind::params::rfc1912_zones":
+    ensure => present,
+    mode   => '0644',
+    owner  => $bind::params::binduser,
+    group  => $bind::params::bindgroup,
+    content => template("${module_name}/$bind::params::rfc1912_zones_tpl"),
+    notify  => Class['bind::service'],
+  }
+
   file { "$config_dir/named.conf":
     ensure  => present,
     mode    => '0644',
@@ -52,6 +61,6 @@ class bind::config (
     notify  => Class['bind::service'],
   }
 
-  File["$config_dir/named.conf.options"] -> File["$config_dir/named.conf.local"] -> File["$config_dir/named.conf"]
+  File["$config_dir/$bind::params::rfc1912_zones"] -> File["$config_dir/named.conf.options"] -> File["$config_dir/named.conf.local"] -> File["$config_dir/named.conf"] 
 
 }
