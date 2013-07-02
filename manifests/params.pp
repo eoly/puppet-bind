@@ -10,6 +10,8 @@ class bind::params {
       $servicename       = 'named'
       $binduser          = 'root'
       $bindgroup         = 'named'
+      $config_dir        = '/etc/named'
+      $working_dir       = '/var/named'
     }
     'Debian',
     'Ubuntu': {
@@ -17,12 +19,16 @@ class bind::params {
       $servicename       = 'bind9'
       $binduser          = 'bind'
       $bindgroup         = 'bind'
+      $config_dir        = '/etc/bind'
+      $working_dir       = '/var/cache/bind'
     }
     default: {
       $packagenameprefix = 'bind'
       $servicename       = 'named'
       $binduser          = 'root'
       $bindgroup         = 'named'
+      $config_dir        = '/etc/named'
+      $working_dir       = '/var/named'
     }
   }
 
