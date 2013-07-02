@@ -55,9 +55,15 @@ options {
     // If BIND logs error messages about the root key being expired,
     // you will need to update your keys.  See https://www.isc.org/bind-keys
     //========================================================================
+
+    <%- if @dnssec_enable == "yes" -%>
     dnssec-enable <%= @dnssec_enable %>;
     dnssec-validation <%= @dnssec_validation %>;
     dnssec-lookaside <%= @dnssec_lookaside %>;
+    bindkeys-file "<%= @config_dir %>/<%= @bindkeys_file %>";
+    <%- else -%>
+    dnssec-enable no;
+    <%- end -%>
 
     auth-nxdomain no;    # conform to RFC1035
 };

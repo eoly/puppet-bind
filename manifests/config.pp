@@ -18,9 +18,10 @@ class bind::config (
   $allow_recursion    = [],
   $allow_transfer     = [],
   $check_names        = [],
-  $dnssec_enable      = 'yes',
-  $dnssec_validation  = 'yes',
-  $dnssec_lookaside   = 'auto',
+  $dnssec_enable      = $bind::params::dnssec_enable,
+  $dnssec_validation  = $bind::params::dnssec_validation,
+  $dnssec_lookaside   = $bind::params::dnssec_lookaside,
+  $bindkeys_file      = $bind::params::bindkeys_file,
   $zones              = {},
   $includes           = []
 ) inherits bind::params {

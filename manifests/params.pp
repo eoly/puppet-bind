@@ -2,6 +2,10 @@
 #
 class bind::params {
 
+  $dnssec_enable      = 'yes'
+  $dnssec_validation  = 'yes'
+  $dnssec_lookaside   = 'auto'
+
   case $::operatingsystem {
     'RedHat',
     'CentOS',
@@ -18,6 +22,7 @@ class bind::params {
       $dump_file          = 'data/cache_dump.db'
       $statistics_file    = 'data/named_stats.txt'
       $memstatistics_file = 'data/named_mem_stats.txt'
+      $bindkeys_file      = 'named.iscdlv.key'
     }
     'Debian',
     'Ubuntu': {
@@ -33,6 +38,7 @@ class bind::params {
       $dump_file          = 'cache_dump.db'
       $statistics_file    = 'named_stats.txt'
       $memstatistics_file = 'named_mem_stats.txt'
+      $bindkeys_file      = 'bind.keys'
     }
     default: {
       $packagenameprefix  = 'bind'
@@ -47,6 +53,7 @@ class bind::params {
       $dump_file          = 'data/cache_dump.db'
       $statistics_file    = 'data/named_stats.txt'
       $memstatistics_file = 'data/named_mem_stats.txt'
+      $bindkeys_file      = 'named.iscdlv.key'
     }
   }
 
