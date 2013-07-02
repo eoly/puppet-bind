@@ -40,6 +40,7 @@ class bind::config (
     owner   => $bind::params::binduser,
     group   => $bind::params::bindgroup,
     content => template("${module_name}/named.conf.local.erb"),
+    notify  => Class['bind::service'],
   }
 
   file { "$config_dir/named.conf.options":
@@ -48,8 +49,9 @@ class bind::config (
     owner   => $bind::params::binduser,
     group   => $bind::params::bindgroup,
     content => template("${module_name}/named.conf.options.erb"),
+    notify  => Class['bind::service'],
   }
 
-  File["$config_dir/named.conf.options"] -> File["$config_dir/named.conf.local"] -> File["$config_dir/named.conf.options"]
+  File["$config_dir/named.conf.options"] -> File["$config_dir/named.conf.local"] -> File["$config_dir/named.conf"]
 
 }
