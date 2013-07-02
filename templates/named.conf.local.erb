@@ -2,25 +2,25 @@
 // Do any local configuration here
 //
 
-<% if !@includes.empty? -%>
-<% @includes.each do |filename| -%>
-include "<%= filename %>";
-<% end -%>
-<% end -%>
+<%- if !@includes.empty? -%>
+<%- @includes.each do |filename| -%>
+    include "<%= filename %>";
+<%- end -%>
+<%- end -%>
 
-<% if @root_servers -%>
-zone "." {
-    type hint;
-    file "<%= @root_servers %>";
-};
-<% end -%>
+<%- if @root_servers -%>
+    zone "." {
+        type hint;
+        file "<%= @root_servers %>";
+    };
+<%- end -%>
 
-<% if !@zones.empty? -%>
-<% @zones.sort_by {|key, value| key}.each do |key,value| -%>
-zone "<%= key %>" IN {
-<% value.each do |line| -%>
-    <%= line %>;
-<% end -%>
-};
-<% end -%>
-<% end -%>
+<%- if !@zones.empty? -%>
+<%- @zones.sort_by {|key, value| key}.each do |key,value| -%>
+    zone "<%= key %>" IN {
+<%- value.each do |line| -%>
+        <%= line %>;
+<%- end -%>
+    };
+<%- end -%>
+<%- end -%>

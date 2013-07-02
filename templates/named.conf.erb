@@ -2,10 +2,10 @@
 
 // This is the primary configuration file for the BIND DNS server named.
 
-<% if @config_dir -%>
-include "<%= @config_dir %>/named.conf.options";
-include "<%= @config_dir %>/named.conf.local";
-<% if @rfc1912_zones -%>
-include "<%= @config_dir %>/<%= @rfc1912_zones %>";
-<% end -%>
-<% end -%>
+<%- if @config_dir -%>
+    include "<%= @config_dir %>/named.conf.options";
+    include "<%= @config_dir %>/named.conf.local";
+<%- if @rfc1912_zones -%>
+    include "<%= @config_dir %>/<%= @rfc1912_zones %>";
+<%- end -%>
+<%- end -%>
