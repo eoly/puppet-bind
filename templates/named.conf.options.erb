@@ -24,13 +24,13 @@ options {
         version "<%= @version %>";
     <% end -%>
     <% if @dump_file -%>
-        dump-file "<%= @dump_file %>";
+        dump-file "<%= @working_dir %>/<%= @dump_file %>";
     <% end -%>
     <% if @statistics_file -%>
-        statistics-file "<%= @statistics_file %>";
+        statistics-file "<%= @working_dir %>/<%= @statistics_file %>";
     <% end -%>
     <% if @memstatistics_file -%>
-        memstatistics-file "<%= @memstatistics_file %>";
+        memstatistics-file "<%= @working_dir %>/<%= @memstatistics_file %>";
     <% end -%>
     <% if !@allow_query.empty? -%>
         allow-query { <%= @allow_query.join("; ") %>; };
