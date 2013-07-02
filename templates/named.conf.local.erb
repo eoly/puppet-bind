@@ -2,6 +2,12 @@
 // Do any local configuration here
 //
 
+<% if !@includes.empty? -%>
+<% @includes.each do |filename| -%>
+include "<%= filename %>";
+<% end -%>
+<% end -%>
+
 <% if !@zones.empty? -%>
 <% @zones.sort_by {|key, value| key}.each do |key,value| -%>
 zone "<%= key %>" IN {
