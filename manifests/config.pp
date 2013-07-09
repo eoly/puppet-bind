@@ -12,6 +12,9 @@ class bind::config (
   $dump_file          = $bind::params::dump_file,
   $statistics_file    = $bind::params::statistics_file,
   $memstatistics_file = $bind::params::statistics_file,
+  $enable_logging     = $bind::params::enable_logging,
+  $log_dir            = $bind::params::log_dir,
+  $log_name           = $bind::params::log_name,
   $allow_query        = [ 'localhost' ],
   $allow_query_cache  = [],
   $recursion          = 'yes',
@@ -25,6 +28,27 @@ class bind::config (
   $zones              = {},
   $includes           = []
 ) inherits bind::params {
+
+  if $enable_logging == 'yes' {
+    file { $log_dir:
+      require => Class['bind::package'],
+      ensure  => directory,
+      mode    => 0770,
+      owner   => 'root',
+      group   => $bind::params::bindgroup,
+      before  => Class['bind::service'],
+    }
+
+    file { "$config_dir/$bind::params::log_config_tpl":
+      before  => File["$config_dir/named.conf"],
+      ensure  => present,
+      mode    => '0644',
+      owner   => $bind::params::binduser,
+      group   => $bind::params::bindgroup,
+      content => template("${module_name}/$bind::params::log_config_tpl"),
+      notify  => Class['bind::service'],
+    }
+  }
 
   file { "$config_dir/$bind::params::rfc1912_zones":
     ensure => present,

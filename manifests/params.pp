@@ -5,6 +5,7 @@ class bind::params {
   $dnssec_enable      = 'yes'
   $dnssec_validation  = 'yes'
   $dnssec_lookaside   = 'auto'
+  $enable_logging     = 'yes'
 
   case $::operatingsystem {
     'RedHat',
@@ -16,6 +17,9 @@ class bind::params {
       $bindgroup          = 'named'
       $config_dir         = '/etc'
       $working_dir        = '/var/named'
+      $log_dir            = '/var/log/named'
+      $log_name           = 'named.log'
+      $log_config_tpl     = 'named.conf.logging.erb'
       $rfc1912_zones      = 'named.rfc1912.zones'
       $rfc1912_zones_tpl  = 'named.rfc1912.zones.rhel.erb'
       $root_servers       = '/var/named/named.ca'
@@ -32,6 +36,9 @@ class bind::params {
       $bindgroup          = 'bind'
       $config_dir         = '/etc/bind'
       $working_dir        = '/var/cache/bind'
+      $log_dir            = '/var/log/bind'
+      $log_name           = 'bind.log'
+      $log_config_tpl     = 'named.conf.logging.erb'
       $rfc1912_zones      = 'named.conf.default-zones'
       $rfc1912_zones_tpl  = 'named.rfc1912.zones.debian.erb'
       $root_servers       = '/etc/bind/db.root'
@@ -47,6 +54,9 @@ class bind::params {
       $bindgroup          = 'named'
       $config_dir         = '/etc/named'
       $working_dir        = '/var/named'
+      $log_dir            = '/var/log/named'
+      $log_name           = 'named.log'
+      $log_config_tpl     = 'named.conf.logging.erb'
       $rfc1912_zones      = 'named.rfc1912.zones'
       $rfc1912_zones_tpl  = 'named.rfc1912.zones.rhel.erb'
       $root_servers       = '/var/named/named.ca'
