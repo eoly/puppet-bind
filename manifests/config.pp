@@ -34,12 +34,12 @@ class bind::config (
       require => Class['bind::package'],
       ensure  => directory,
       mode    => 0770,
-      owner   => 'root',
+      owner   => $bind::params::binduser,
       group   => $bind::params::bindgroup,
       before  => Class['bind::service'],
     }
 
-    file { "$config_dir/$bind::params::log_config_tpl":
+    file { "$config_dir/named.conf.logging":
       before  => File["$config_dir/named.conf"],
       ensure  => present,
       mode    => '0644',
@@ -51,6 +51,7 @@ class bind::config (
   }
 
   file { "$config_dir/$bind::params::rfc1912_zones":
+    require => Class['bind::package'],
     ensure => present,
     mode   => '0644',
     owner  => $bind::params::binduser,
@@ -60,6 +61,7 @@ class bind::config (
   }
 
   file { "$config_dir/named.conf":
+    require => Class['bind::package'],
     ensure  => present,
     mode    => '0644',
     owner   => $bind::params::binduser,
@@ -69,6 +71,7 @@ class bind::config (
   }
 
   file { "$config_dir/named.conf.local":
+    require => Class['bind::package'],
     ensure  => present,
     mode    => '0644',
     owner   => $bind::params::binduser,
@@ -78,6 +81,7 @@ class bind::config (
   }
 
   file { "$config_dir/named.conf.options":
+    require => Class['bind::package'],
     ensure  => present,
     mode    => '0644',
     owner   => $bind::params::binduser,
